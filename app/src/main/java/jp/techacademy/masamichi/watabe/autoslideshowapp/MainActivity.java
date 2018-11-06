@@ -92,17 +92,19 @@ public class MainActivity extends AppCompatActivity {
 
                 mCursor.close();
 */
-                if(imageUriArray.size() != 0){
-                    CntNum += 1;
-                    if (CntNum == imageUriArray.size()) {
-                        CntNum = 0;
-                    }
-                    int num = CntNum % imageUriArray.size();
-                    mImageView.setImageURI(imageUriArray.get(num));
-                } else {
-                    showAlertDialog();
-                }
+                if (mTimer == null) {
+                    if (imageUriArray.size() != 0) {
+                        CntNum += 1;
+                        if (CntNum == imageUriArray.size()) {
+                            CntNum = 0;
+                        }
+                        int num = CntNum % imageUriArray.size();
+                        mImageView.setImageURI(imageUriArray.get(num));
 
+                    } else {
+                        showAlertDialog();
+                    }
+                }
             }
         });
 
@@ -134,17 +136,18 @@ public class MainActivity extends AppCompatActivity {
 
                 mCursor.close();
 */
-                if(imageUriArray.size() != 0){
-                    CntNum -= 1;
-                    if (CntNum < 0) {
-                        CntNum = imageUriArray.size() - 1;
+                if (mTimer == null) {
+                    if (imageUriArray.size() != 0) {
+                        CntNum -= 1;
+                        if (CntNum < 0) {
+                            CntNum = imageUriArray.size() - 1;
+                        }
+                        int num = CntNum % imageUriArray.size();
+                        mImageView.setImageURI(imageUriArray.get(num));
+                    } else {
+                        showAlertDialog();
                     }
-                    int num = CntNum % imageUriArray.size();
-                    mImageView.setImageURI(imageUriArray.get(num));
-                } else {
-                    showAlertDialog();
                 }
-
             }
         });
 
