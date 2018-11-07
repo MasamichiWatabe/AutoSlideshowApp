@@ -92,18 +92,16 @@ public class MainActivity extends AppCompatActivity {
 
                 mCursor.close();
 */
-                if (mTimer == null) {
-                    if (imageUriArray.size() != 0) {
-                        CntNum += 1;
-                        if (CntNum == imageUriArray.size()) {
-                            CntNum = 0;
-                        }
-                        int num = CntNum % imageUriArray.size();
-                        mImageView.setImageURI(imageUriArray.get(num));
-
-                    } else {
-                        showAlertDialog();
+                if (imageUriArray.size() != 0) {
+                    CntNum += 1;
+                    if (CntNum == imageUriArray.size()) {
+                        CntNum = 0;
                     }
+                    int num = CntNum % imageUriArray.size();
+                    mImageView.setImageURI(imageUriArray.get(num));
+
+                } else {
+                    showAlertDialog();
                 }
             }
         });
@@ -136,17 +134,16 @@ public class MainActivity extends AppCompatActivity {
 
                 mCursor.close();
 */
-                if (mTimer == null) {
-                    if (imageUriArray.size() != 0) {
-                        CntNum -= 1;
-                        if (CntNum < 0) {
-                            CntNum = imageUriArray.size() - 1;
-                        }
-                        int num = CntNum % imageUriArray.size();
-                        mImageView.setImageURI(imageUriArray.get(num));
-                    } else {
-                        showAlertDialog();
+
+                if (imageUriArray.size() != 0) {
+                    CntNum -= 1;
+                    if (CntNum < 0) {
+                        CntNum = imageUriArray.size() - 1;
                     }
+                    int num = CntNum % imageUriArray.size();
+                    mImageView.setImageURI(imageUriArray.get(num));
+                } else {
+                        showAlertDialog();
                 }
             }
         });
@@ -161,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
                         mTimer = new Timer();
 
                         mPlayButton.setText("停止");
+
+                        mForwardButton.setEnabled(false);
+                        mBackButton.setEnabled(false);
 
                         mTimer.schedule(new TimerTask() {
                             @Override
@@ -183,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                         mTimer.cancel();
                         mTimer = null;
                         mPlayButton.setText("再生");
+                        mForwardButton.setEnabled(true);
+                        mBackButton.setEnabled(true);
                     }
                 } else {
                     showAlertDialog();
